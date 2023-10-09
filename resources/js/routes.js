@@ -6,7 +6,7 @@ const CategoryEdit = () => import('./components/category/Edit.vue' /* webpackChu
 export const routes = [
     {
         name: 'home',
-        path: '/',
+        path: '/web',
         component: Welcome
     },
     {
