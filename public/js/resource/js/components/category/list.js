@@ -19,7 +19,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   name: "categories",
   data: function data() {
     return {
-      categories: []
+      categories: {
+        type: Object
+      }
     };
   },
   mounted: function mounted() {

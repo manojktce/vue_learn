@@ -49,7 +49,9 @@ export default {
     name:"categories",
     data(){
         return {
-            categories: []
+            categories: {
+                type: Object,
+            }
         }
     },
     mounted(){
