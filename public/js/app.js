@@ -2102,13 +2102,13 @@ var render = function render() {
     staticClass: "nav-item nav-link",
     attrs: {
       "exact-active-class": "active",
-      to: "/web"
+      to: "/"
     }
   }, [_vm._v("Home")]), _vm._v(" "), _c("router-link", {
     staticClass: "nav-item nav-link",
     attrs: {
       "exact-active-class": "active",
-      to: "/web/category"
+      to: "/category"
     }
   }, [_vm._v("Category")])], 1)])], 1)]), _vm._v(" "), _c("div", {
     staticClass: "container mt-5"
@@ -2225,19 +2225,19 @@ var CategoryEdit = function CategoryEdit() {
 
 var routes = [{
   name: 'home',
-  path: '/web',
+  path: '/',
   component: Welcome
 }, {
   name: 'categoryList',
-  path: '/web/category',
+  path: '/category',
   component: CategoryList
 }, {
   name: 'categoryEdit',
-  path: '/web/category/:id/edit',
+  path: '/category/:id/edit',
   component: CategoryEdit
 }, {
   name: 'categoryAdd',
-  path: '/web/category/add',
+  path: '/category/add',
   component: CategoryCreate
 }];
 
