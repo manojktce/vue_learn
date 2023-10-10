@@ -1,7 +1,7 @@
 <template>
     <div class="row">
         <div class="col-12 mb-2 text-end">
-            <router-link :to='{name:"categoryAdd"}' class="btn btn-primary">Create</router-link>
+            <router-link :to='{name:"categoryAdd"}' class="btn btn-sm btn-primary">Create</router-link>
         </div>
         <div class="col-12">
             <div class="card">
@@ -19,14 +19,14 @@
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            <tbody v-if="categories.length > 0">
-                                <tr v-for="(category,key) in categories" :key="key">
+                            <tbody v-if="categories && categories.data">
+                                <tr v-for="(category,key) in categories.data" :key="key">
                                     <td>{{ category.id }}</td>
                                     <td>{{ category.title }}</td>
                                     <td>{{ category.description }}</td>
                                     <td>
-                                        <router-link :to='{name:"categoryEdit",params:{id:category.id}}' class="btn btn-success">Edit</router-link>
-                                        <button type="button" @click="deleteCategory(category.id)" class="btn btn-danger">Delete</button>
+                                        <router-link :to='{name:"categoryEdit",params:{id:category.id}}' class="btn btn-sm btn-success">Edit</router-link>
+                                        <button type="button" @click="deleteCategory(category.id)" class="btn btn-sm btn-danger">Delete</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -37,6 +37,7 @@
                             </tbody>
                         </table>
                     </div>
+                    <pagination align="center" :data="categories" @pagination-change-page="getCategories"></pagination>
                 </div>
             </div>
         </div>
@@ -48,21 +49,19 @@ export default {
     name:"categories",
     data(){
         return {
-            categories:[]
+            categories: []
         }
     },
     mounted(){
         this.getCategories()
     },
     methods:{
-        async getCategories(){
+        async getCategories(page=1){
             console.log("Entered");
-            await this.axios.get('/api/category').then(response=>{
-                console.log(response.data);
-                this.categories = response.data
-            }).catch(error=>{
-                console.log(error)
-                this.categories = []
+            await this.axios.get('/api/category?page='+page+'').then(({data})=>{
+                this.categories = data;
+            }).catch(({response})=>{
+                console.error(response)
             })
         },
         deleteCategory(id){

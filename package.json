@@ -20,6 +20,8 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+        "@fortawesome/vue-fontawesome": "^2.0.2",
+        "laravel-vue-pagination": "^2.3.1",
         "vue": "^2.6.12"
     }
 }

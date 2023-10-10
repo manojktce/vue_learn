@@ -7,9 +7,12 @@ import VueRouter from 'vue-router';
 import VueAxios from 'vue-axios';
 import axios from 'axios';
 import {routes} from './routes';
+import pagination from 'laravel-vue-pagination';
+
  
 Vue.use(VueRouter);
 Vue.use(VueAxios, axios);
+Vue.component('pagination', pagination);
  
 const router = new VueRouter({
     mode: 'history',

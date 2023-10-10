@@ -27,21 +27,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   methods: {
     getCategories: function getCategories() {
-      var _this = this;
+      var _arguments = arguments,
+        _this = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+        var page;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
+              page = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : 1;
               console.log("Entered");
-              _context.next = 3;
-              return _this.axios.get('/api/category').then(function (response) {
-                console.log(response.data);
-                _this.categories = response.data;
-              })["catch"](function (error) {
-                console.log(error);
-                _this.categories = [];
+              _context.next = 4;
+              return _this.axios.get('/api/category?page=' + page + '').then(function (_ref) {
+                var data = _ref.data;
+                _this.categories = data;
+              })["catch"](function (_ref2) {
+                var response = _ref2.response;
+                console.error(response);
               });
-            case 3:
+            case 4:
             case "end":
               return _context.stop();
           }
@@ -82,7 +85,7 @@ var render = function render() {
   }, [_c("div", {
     staticClass: "col-12 mb-2 text-end"
   }, [_c("router-link", {
-    staticClass: "btn btn-primary",
+    staticClass: "btn btn-sm btn-primary",
     attrs: {
       to: {
         name: "categoryAdd"
@@ -98,11 +101,11 @@ var render = function render() {
     staticClass: "table-responsive"
   }, [_c("table", {
     staticClass: "table table-bordered"
-  }, [_vm._m(1), _vm._v(" "), _vm.categories.length > 0 ? _c("tbody", _vm._l(_vm.categories, function (category, key) {
+  }, [_vm._m(1), _vm._v(" "), _vm.categories && _vm.categories.data ? _c("tbody", _vm._l(_vm.categories.data, function (category, key) {
     return _c("tr", {
       key: key
     }, [_c("td", [_vm._v(_vm._s(category.id))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(category.title))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(category.description))]), _vm._v(" "), _c("td", [_c("router-link", {
-      staticClass: "btn btn-success",
+      staticClass: "btn btn-sm btn-success",
       attrs: {
         to: {
           name: "categoryEdit",
@@ -112,7 +115,7 @@ var render = function render() {
         }
       }
     }, [_vm._v("Edit")]), _vm._v(" "), _c("button", {
-      staticClass: "btn btn-danger",
+      staticClass: "btn btn-sm btn-danger",
       attrs: {
         type: "button"
       },
@@ -122,7 +125,15 @@ var render = function render() {
         }
       }
     }, [_vm._v("Delete")])], 1)]);
-  }), 0) : _c("tbody", [_vm._m(2)])])])])])])]);
+  }), 0) : _c("tbody", [_vm._m(2)])])]), _vm._v(" "), _c("pagination", {
+    attrs: {
+      align: "center",
+      data: _vm.categories
+    },
+    on: {
+      "pagination-change-page": _vm.getCategories
+    }
+  })], 1)])])]);
 };
 var staticRenderFns = [function () {
   var _vm = this,
